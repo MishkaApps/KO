@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">KO</string>
+
+    <string name="btn_mode_time_plus_points">Время + баллы</string>
+    <string name="btn_mode_time">Время</string>
+    <string name="btn_mode_result_plus_points">Время + баллы</string>
+    <string name="btn_mode_result">Время + баллы</string>
+    <string name="btn_mode_passnpass">Время + баллы</string>
+    <string name="btn_mode_moose_races">Время + баллы</string>
+</resources>
