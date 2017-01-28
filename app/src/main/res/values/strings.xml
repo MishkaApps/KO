@@ -3,8 +3,24 @@
 
     <string name="btn_mode_time_plus_points">Время + баллы</string>
     <string name="btn_mode_time">Время</string>
-    <string name="btn_mode_result_plus_points">Время + баллы</string>
-    <string name="btn_mode_result">Время + баллы</string>
-    <string name="btn_mode_passnpass">Время + баллы</string>
-    <string name="btn_mode_moose_races">Время + баллы</string>
+    <string name="btnModeResultPlusPoints">Результат + баллы</string>
+    <string name="btn_mode_result">Результат</string>
+    <string name="btn_mode_passnpass">Прошел/Не прошел</string>
+    <string name="btn_mode_moose_races">Лосинные бега</string>
+
+    <string name="label_stage">Этап</string>
+    <string name="label_membership_number">Номер участника</string>
+    <string name="label_all_participants">Всего</string>
+    <string name="button_start_stop_time">Старт</string>
+    <string name="button_finish">Записать результат</string>
+    <string name="label_points">Баллы</string>
+    <string name="label_time">Время</string>
+    <string name="btnNext">Далее</string>
+    <string name="label_result">Результат</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="StageAsExtra">STAGE</string>
+    <string name="tvMinutes">Минуты</string>
+    <string name="tvSeconds">Секунды</string>
 </resources>
