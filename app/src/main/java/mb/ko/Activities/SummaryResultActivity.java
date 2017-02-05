@@ -5,26 +5,29 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import mb.ko.R;
+import mb.ko.Stage;
 
 public class SummaryResultActivity extends AppCompatActivity {
 
-    private TextView tvSummaryStage, tvSummaryCompetitorsAmount, tvSummaryTime, tvSummaryPoints, tvSummaryNumber;
+    private TextView tvStage, tvSummaryCompetitorsAmount, tvTime, tvPoints, tvCompetitorNumber;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_summary_result);
 
-        tvSummaryStage = (TextView)findViewById(R.id.tvSummaryStage);
+        tvStage = (TextView)findViewById(R.id.tvStage);
+        tvCompetitorNumber = (TextView)findViewById(R.id.tvCompetitorNumber);
         tvSummaryCompetitorsAmount = (TextView)findViewById(R.id.tvSummaryCompetitorsAmount);
-        tvSummaryTime = (TextView)findViewById(R.id.tvSummaryTime);
-        tvSummaryPoints = (TextView)findViewById(R.id.tvSummaryPoints);
-        tvSummaryNumber = (TextView)findViewById(R.id.tvSummaryNumber);
+        tvPoints = (TextView)findViewById(R.id.tvPoints);
+        tvTime = (TextView)findViewById(R.id.tvTime);
 
-        tvSummaryStage.setText(String.valueOf(getIntent().getIntExtra("stage", 0)));
-        tvSummaryNumber.setText(String.valueOf(getIntent().getIntExtra("number", 0)));
-        tvSummaryTime.setText(getIntent().getStringExtra("time"));
-        tvSummaryPoints.setText(String.valueOf(getIntent().getIntExtra("points", 0)));
+        Stage stage = (Stage) getIntent().getSerializableExtra(getResources().getString(R.string.StageAsExtra));
+
+        tvStage.setText(String.valueOf(stage.getNumber()));
+        tvCompetitorNumber.setText(String.valueOf(stage.getCompetitorNumber()));
+        tvSummaryCompetitorsAmount.setText(String.valueOf(stage.getSummaryCompetitorsAmount()));
+        tvPoints.setText(String.valueOf(stage.getCurrentCompetitor().getPoints()));
 
     }
 }

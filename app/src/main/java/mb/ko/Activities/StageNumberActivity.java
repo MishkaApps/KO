@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import mb.ko.Activities.CompetitorNumberActivity;
 import mb.ko.R;
 import mb.ko.Stage;
 
@@ -21,7 +20,7 @@ public class StageNumberActivity extends AppCompatActivity implements View.OnKey
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stage_number);
 
-        etStage = (EditText)findViewById(R.id.etStage);
+        etStage = (EditText)findViewById(R.id.tvStage);
         btnNext = (Button)findViewById(R.id.btnStageNumberNext);
 
         etStage.setOnKeyListener(this);
@@ -31,17 +30,17 @@ public class StageNumberActivity extends AppCompatActivity implements View.OnKey
     @Override
     public boolean onKey(View v, int keyCode, KeyEvent event) {
 
-        if(v == etStage && event.getKeyCode() == KeyEvent.KEYCODE_ENTER && event.getAction() == KeyEvent.ACTION_UP){
+        if(v == etStage && event.getKeyCode() == KeyEvent.KEYCODE_ENTER && event.getAction() == KeyEvent.ACTION_UP)
             next();
-        }
+
         return false;
     }
 
     @Override
     public void onClick(View v) {
-        if(v == btnNext){
+        if(v == btnNext)
             next();
-        }
+
     }
 
     private void next(){

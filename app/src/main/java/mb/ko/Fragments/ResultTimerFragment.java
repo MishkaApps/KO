@@ -12,11 +12,12 @@ import android.widget.TextView;
 
 import mb.ko.Activities.TimerActivity;
 import mb.ko.R;
+import mb.ko.WorkFragment;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ResultTimerFragment extends Fragment implements View.OnClickListener {
+public class ResultTimerFragment extends Fragment implements View.OnClickListener, WorkFragment {
     private Button btnTimer;
 
 
@@ -51,4 +52,13 @@ public class ResultTimerFragment extends Fragment implements View.OnClickListene
     }
 
 
+    @Override
+    public int getTime() {
+        return 0;
+    }
+
+    @Override
+    public int getPoints() {
+        return 0;
+    }
 }

@@ -8,11 +8,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import mb.ko.R;
+import mb.ko.WorkFragment;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class StopwatchFragment extends Fragment {
+public class StopwatchFragment extends Fragment implements WorkFragment {
 
 
     public StopwatchFragment() {
@@ -27,4 +28,13 @@ public class StopwatchFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_stopwatch, container, false);
     }
 
+    @Override
+    public int getTime() {
+        return 0;
+    }
+
+    @Override
+    public int getPoints() {
+        return 0;
+    }
 }

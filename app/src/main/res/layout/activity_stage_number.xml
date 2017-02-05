@@ -43,7 +43,7 @@
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/etStage"
+                    android:id="@+id/tvStage"
                     android:inputType="number"
                     android:maxLength="5"
                     android:layout_gravity="center"

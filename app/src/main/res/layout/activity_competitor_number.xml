@@ -45,7 +45,7 @@
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/etNumber"
+                    android:id="@+id/tvCompetitorNumber"
                     android:inputType="number"
                     android:maxLength="5"
                     android:layout_gravity="center"

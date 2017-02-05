@@ -36,7 +36,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/etStage"
+                    android:id="@+id/tvStage"
                     android:layout_gravity="center"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -62,7 +62,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/etNumber"
+                    android:id="@+id/tvCompetitorNumber"
                     android:layout_gravity="center"
                     android:textStyle="bold" />
             </LinearLayout>
