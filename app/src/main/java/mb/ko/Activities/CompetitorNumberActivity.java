@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -28,6 +29,10 @@ public class CompetitorNumberActivity extends AppCompatActivity implements View.
 
         etNumber.setOnKeyListener(this);
         btnNext.setOnClickListener(this);
+
+        etNumber.setText("");
+        etNumber.requestFocus();
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);  // todo Узнать как точно работает этот метод
     }
 
     @Override
@@ -50,12 +55,7 @@ public class CompetitorNumberActivity extends AppCompatActivity implements View.
         Intent intent = new Intent(this, WorkActivity.class);
 
         Stage stage = (Stage) getIntent().getSerializableExtra(getResources().getString(R.string.StageAsExtra));
-        if(stage == previousStage)
-            Log.d("mylog", "stages the same");
-        else
-            Log.d("mylog", "stages not the same");
 
-        previousStage = stage;
         stage.setCompetitor(Integer.decode(etNumber.getText().toString()));
         intent.putExtra(getResources().getString(R.string.StageAsExtra), stage);
 

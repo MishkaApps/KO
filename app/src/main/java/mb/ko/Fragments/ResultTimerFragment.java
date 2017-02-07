@@ -8,10 +8,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
 
 import mb.ko.Activities.TimerActivity;
+import mb.ko.Activities.WorkActivity;
 import mb.ko.R;
+import mb.ko.Time;
 import mb.ko.WorkFragment;
 
 /**
@@ -19,6 +20,7 @@ import mb.ko.WorkFragment;
  */
 public class ResultTimerFragment extends Fragment implements View.OnClickListener, WorkFragment {
     private Button btnTimer;
+    private WorkActivity workActivity;
 
 
     public ResultTimerFragment() {
@@ -53,12 +55,17 @@ public class ResultTimerFragment extends Fragment implements View.OnClickListene
 
 
     @Override
-    public int getTime() {
-        return 0;
+    public Time getTime() {
+        return null;
     }
 
     @Override
     public int getPoints() {
         return 0;
+    }
+
+    @Override
+    public void setWorkActivity(WorkActivity workActivity) {
+        this.workActivity = workActivity;
     }
 }

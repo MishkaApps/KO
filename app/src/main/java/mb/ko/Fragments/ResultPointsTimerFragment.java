@@ -10,7 +10,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import mb.ko.Activities.TimerActivity;
+import mb.ko.Activities.WorkActivity;
 import mb.ko.R;
+import mb.ko.Time;
 import mb.ko.WorkFragment;
 
 /**
@@ -18,6 +20,7 @@ import mb.ko.WorkFragment;
  */
 public class ResultPointsTimerFragment extends Fragment implements View.OnClickListener, WorkFragment {
     private Button btnTimer;
+    private WorkActivity workActivity;
 
     public ResultPointsTimerFragment() {
         // Required empty public constructor
@@ -46,12 +49,17 @@ public class ResultPointsTimerFragment extends Fragment implements View.OnClickL
     }
 
     @Override
-    public int getTime() {
-        return 0;
+    public Time getTime() {
+        return null;
     }
 
     @Override
     public int getPoints() {
         return 0;
+    }
+
+    @Override
+    public void setWorkActivity(WorkActivity workActivity) {
+        this.workActivity = workActivity;
     }
 }

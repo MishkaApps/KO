@@ -63,6 +63,8 @@ public class WorkActivity extends AppCompatActivity implements View.OnClickListe
         }
         fragmentTransaction.commit();
 
+        workFragment.setWorkActivity(this);
+
         btnFinish.setOnClickListener(this);
     }
 
@@ -73,10 +75,14 @@ public class WorkActivity extends AppCompatActivity implements View.OnClickListe
         if(v == btnFinish){
             Intent intent = new Intent(this, SummaryResultActivity.class);
             stage.getCurrentCompetitor().setPoints(workFragment.getPoints());
-            workFragment.getTime();
+            stage.getCurrentCompetitor().setTime(workFragment.getTime());
 
             intent.putExtra(getResources().getString(R.string.StageAsExtra), stage);
             startActivity(intent);
         }
+    }
+
+    public void allowContinue(boolean flag) {
+        btnFinish.setEnabled(flag);
     }
 }

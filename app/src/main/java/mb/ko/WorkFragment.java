@@ -1,9 +1,12 @@
 package mb.ko;
 
+import mb.ko.Activities.WorkActivity;
+
 /**
  * Created by mbolg on 05.02.2017.
  */
 public interface WorkFragment {
-    int getTime();
+    Time getTime();
     int getPoints();
+    void setWorkActivity(WorkActivity workActivity);
 }

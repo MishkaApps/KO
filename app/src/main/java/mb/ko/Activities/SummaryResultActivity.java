@@ -28,6 +28,7 @@ public class SummaryResultActivity extends AppCompatActivity {
         tvCompetitorNumber.setText(String.valueOf(stage.getCompetitorNumber()));
         tvSummaryCompetitorsAmount.setText(String.valueOf(stage.getSummaryCompetitorsAmount()));
         tvPoints.setText(String.valueOf(stage.getCurrentCompetitor().getPoints()));
+        tvTime.setText((stage.getCurrentCompetitor().getTime()));
 
     }
 }

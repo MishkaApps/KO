@@ -1,10 +1,13 @@
 package mb.ko.Activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -25,6 +28,10 @@ public class StageNumberActivity extends AppCompatActivity implements View.OnKey
 
         etStage.setOnKeyListener(this);
         btnNext.setOnClickListener(this);
+
+        etStage.setText("");
+        etStage.requestFocus();
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);  // todo Узнать как точно работает этот метод
     }
 
     @Override
