@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="timer_duration">90000</integer>
+    <integer name="timer_tick_period">1</integer>
+    <integer name="set_timer_time">0</integer>
+</resources>

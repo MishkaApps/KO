@@ -4,6 +4,7 @@ package mb.ko.Fragments;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.os.SystemClock;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +21,7 @@ import mb.ko.WorkFragment;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class StopwatchPointsFragment extends Fragment implements WorkFragment, View.OnClickListener {
+public class StopwatchPointsFragment extends Fragment implements WorkFragment, View.OnClickListener, View.OnKeyListener {
     private Chronometer chronometer;
     private Time chronometerTime;
     private EditText etPoints;
@@ -42,7 +43,9 @@ public class StopwatchPointsFragment extends Fragment implements WorkFragment, V
         btnStartStop = (Button) view.findViewById(R.id.btnStartStop);
 
         btnStartStop.setOnClickListener(this);
+        etPoints.setOnKeyListener(this);
         boolChronometerRun = false;
+        etPoints.setText("");
 
         return view;
     }
@@ -60,7 +63,6 @@ public class StopwatchPointsFragment extends Fragment implements WorkFragment, V
     @Override
     public void setWorkActivity(WorkActivity workActivity) {
         this.workActivity = workActivity;
-        workActivity.allowContinue(false);
     }
 
     @Override
@@ -76,8 +78,17 @@ public class StopwatchPointsFragment extends Fragment implements WorkFragment, V
                 chronometerTime = new Time(SystemClock.elapsedRealtime() - chronometer.getBase());
                 btnStartStop.setText(getResources().getString(R.string.line_START));
                 boolChronometerRun = false;
-                workActivity.allowContinue(true);
+                workActivity.chronometerUsed(true);
             }
         }
+    }
+
+    @Override
+    public boolean onKey(View v, int keyCode, KeyEvent event) {
+        if(etPoints.getText().length() > 0)
+            workActivity.pointsFieldUsed(true);
+        else
+            workActivity.pointsFieldUsed(false);
+        return false;
     }
 }

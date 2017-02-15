@@ -9,92 +9,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
-            android:orientation="horizontal"
+
+
+
+        <Space
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1">
-
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/label_stage"
-                    android:id="@+id/textView3"
-                    android:layout_gravity="center" />
-
-                <Space
-                    android:layout_width="match_parent"
-                    android:layout_height="10dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/tvStage"
-                    android:layout_gravity="center"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/label_membership_number"
-                    android:id="@+id/textView4"
-                    android:layout_gravity="center" />
-
-                <Space
-                    android:layout_width="match_parent"
-                    android:layout_height="10dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/tvCompetitorNumber"
-                    android:layout_gravity="center"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/label_all_participants"
-                    android:id="@+id/textView5"
-                    android:layout_gravity="center" />
-
-                <Space
-                    android:layout_width="match_parent"
-                    android:layout_height="10dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="1000"
-                    android:id="@+id/textView8"
-                    android:layout_gravity="center"
-                    android:textStyle="bold" />
-            </LinearLayout>
-        </LinearLayout>
-
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
 
         <LinearLayout
             android:orientation="horizontal"
@@ -119,7 +40,7 @@
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:id="@+id/etTimerMinutes"
+                    android:id="@+id/etMinutes"
                     android:layout_weight="1"
                     android:layout_gravity="center"
                     android:gravity="center"
@@ -143,7 +64,7 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:id="@+id/etTimerSeconds"
+                android:id="@+id/etSeconds"
                 android:layout_weight="1"
                 android:layout_gravity="center"
                 android:gravity="center"
@@ -151,25 +72,18 @@
                 android:maxLength="2" />
         </LinearLayout>
 
-            <Button
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="@string/button_start_stop_time"
-                android:id="@+id/btnTimerStart"
-                android:layout_gravity="center"
-                android:layout_weight="1" />
         </LinearLayout>
 
         <Space
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="2" />
+            android:layout_weight="1" />
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="0.5"
-            android:text="@string/btnNext"
+            android:text="@string/btnOk"
             android:id="@+id/btnFinish"
             android:layout_gravity="center"
             android:background="@color/colorButtonBackground" />

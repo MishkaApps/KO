@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
@@ -23,8 +24,8 @@ public class StageNumberActivity extends AppCompatActivity implements View.OnKey
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stage_number);
 
-        etStage = (EditText)findViewById(R.id.tvStage);
-        btnNext = (Button)findViewById(R.id.btnStageNumberNext);
+        etStage = (EditText) findViewById(R.id.tvStage);
+        btnNext = (Button) findViewById(R.id.btnStageNumberNext);
 
         etStage.setOnKeyListener(this);
         btnNext.setOnClickListener(this);
@@ -37,7 +38,8 @@ public class StageNumberActivity extends AppCompatActivity implements View.OnKey
     @Override
     public boolean onKey(View v, int keyCode, KeyEvent event) {
 
-        if(v == etStage && event.getKeyCode() == KeyEvent.KEYCODE_ENTER && event.getAction() == KeyEvent.ACTION_UP)
+        if (v == etStage && event.getKeyCode() == KeyEvent.KEYCODE_ENTER && event.getAction() == KeyEvent.ACTION_UP)
+            if (etStage.getText().length() > 0)
             next();
 
         return false;
@@ -45,12 +47,13 @@ public class StageNumberActivity extends AppCompatActivity implements View.OnKey
 
     @Override
     public void onClick(View v) {
-        if(v == btnNext)
-            next();
+        if (v == btnNext)
+            if (etStage.getText().length() > 0)
+                next();
 
     }
 
-    private void next(){
+    private void next() {
         Intent intent = new Intent(this, CompetitorNumberActivity.class);
 
         Integer stageNumber = Integer.decode(etStage.getText().toString());

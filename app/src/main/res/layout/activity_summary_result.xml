@@ -107,7 +107,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:id="@+id/lytSummaryResultPoints">
 
                 <TextView
                     android:layout_width="0dp"
@@ -147,6 +148,15 @@
 
 
         </LinearLayout>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.5"
+            android:id="@+id/btnSummaryResultNext"
+            android:text="@string/btnNext"
+            android:layout_gravity="center"
+            android:background="@color/colorButtonBackground" />
 
     </LinearLayout>
 </RelativeLayout>

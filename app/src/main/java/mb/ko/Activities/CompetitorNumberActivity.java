@@ -24,8 +24,8 @@ public class CompetitorNumberActivity extends AppCompatActivity implements View.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_competitor_number);
 
-        etNumber = (EditText)findViewById(R.id.tvCompetitorNumber);
-        btnNext = (Button)findViewById(R.id.btnNext);
+        etNumber = (EditText) findViewById(R.id.tvCompetitorNumber);
+        btnNext = (Button) findViewById(R.id.btnNext);
 
         etNumber.setOnKeyListener(this);
         btnNext.setOnClickListener(this);
@@ -38,20 +38,22 @@ public class CompetitorNumberActivity extends AppCompatActivity implements View.
     @Override
     public boolean onKey(View v, int keyCode, KeyEvent event) {
 
-        if(v == etNumber && event.getKeyCode() == KeyEvent.KEYCODE_ENTER && event.getAction() == KeyEvent.ACTION_UP)
-            next();
+        if (v == etNumber && event.getKeyCode() == KeyEvent.KEYCODE_ENTER && event.getAction() == KeyEvent.ACTION_UP)
+            if (etNumber.getText().length() > 0)
+                next();
 
         return false;
     }
 
     @Override
     public void onClick(View v) {
-        if(v == btnNext)
-            next();
+        if (v == btnNext)
+            if (etNumber.getText().length() > 0)
+                next();
 
     }
 
-    private void next(){
+    private void next() {
         Intent intent = new Intent(this, WorkActivity.class);
 
         Stage stage = (Stage) getIntent().getSerializableExtra(getResources().getString(R.string.StageAsExtra));
