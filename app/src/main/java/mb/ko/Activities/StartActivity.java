@@ -49,6 +49,7 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
                 intent.putExtra(getResources().getString(R.string.StageAsExtra), new Stage(WorkActivityType.ResultAndTimer));
                 break;
 
+
         }
 
         startActivity(intent);

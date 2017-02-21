@@ -4,13 +4,11 @@ package mb.ko.Fragments;
 import android.content.Intent;
 import android.os.Bundle;
 import android.app.Fragment;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Chronometer;
 import android.widget.EditText;
 
 import mb.ko.Activities.TimerActivity;
@@ -43,12 +41,12 @@ public class ResultPointsTimerFragment extends Fragment implements View.OnClickL
         btnStartStop = (Button) view.findViewById(R.id.btnStartStop);
         btnReset = (Button) view.findViewById(R.id.btnReset);
         timer = (Timer) view.findViewById(R.id.timer);
-        timer.setTimerParameters(getResources().getInteger(R.integer.timer_duration), getResources().getInteger(R.integer.timer_tick_period));
         timer.setStartStopButton(btnStartStop);
 
         btnStartStop.setOnClickListener(this);
         btnReset.setOnClickListener(this);
         etPoints.setOnKeyListener(this);
+        etResult.setOnKeyListener(this);
         timer.setOnClickListener(this);
         etPoints.setText("");
         etResult.setText("");
@@ -62,8 +60,10 @@ public class ResultPointsTimerFragment extends Fragment implements View.OnClickL
         if (v == btnStartStop) {
             if (!timer.isRun())
                 timer.start();
-            else
+            else {
                 timer.stop();
+                workActivity.chronometerUsed(true);
+            }
             return;
         }
 
@@ -72,8 +72,9 @@ public class ResultPointsTimerFragment extends Fragment implements View.OnClickL
             return;
         }
 
-        if (v == timer){
+        if (v == timer) {
             Intent intent = new Intent(getActivity(), TimerActivity.class);
+            intent.putExtra(getResources().getString(R.string.timer_time), getResources().getString(R.string.with_result));
             startActivityForResult(intent, getResources().getInteger(R.integer.set_timer_time));
         }
 
@@ -82,7 +83,7 @@ public class ResultPointsTimerFragment extends Fragment implements View.OnClickL
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        timer.setTimerParameters(data.getLongExtra(getResources().getString(R.string.timer_time), 1000), getResources().getInteger(R.integer.timer_tick_period));
+        workActivity.saveTimerDuration(data.getLongExtra(getResources().getString(R.string.timer_time), 1000));
     }
 
     @Override
@@ -92,12 +93,22 @@ public class ResultPointsTimerFragment extends Fragment implements View.OnClickL
 
     @Override
     public int getPoints() {
-        return 0;
+        return Integer.parseInt(etPoints.getText().toString());
+    }
+
+    @Override
+    public int getResult() {
+        return Integer.parseInt(etResult.getText().toString());
     }
 
     @Override
     public void setWorkActivity(WorkActivity workActivity) {
         this.workActivity = workActivity;
+    }
+
+    @Override
+    public void setTimerDuration(long timerDuration) {
+        timer.setTimerParameters(timerDuration, workActivity.getResources().getInteger(R.integer.timer_tick_period));
     }
 
     @Override

@@ -8,5 +8,9 @@ import mb.ko.Activities.WorkActivity;
 public interface WorkFragment {
     Time getTime();
     int getPoints();
+    int getResult();
     void setWorkActivity(WorkActivity workActivity);
+
+    void setTimerDuration(long timerDuration);
+
 }

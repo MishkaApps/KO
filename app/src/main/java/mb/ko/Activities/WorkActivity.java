@@ -5,6 +5,7 @@ import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -15,6 +16,7 @@ import mb.ko.Fragments.StopwatchFragment;
 import mb.ko.R;
 import mb.ko.Fragments.StopwatchPointsFragment;
 import mb.ko.Stage;
+import mb.ko.WorkActivityType;
 import mb.ko.WorkFragment;
 
 public class WorkActivity extends AppCompatActivity implements View.OnClickListener {
@@ -31,10 +33,10 @@ public class WorkActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_work);
 
 
-        btnFinish = (Button)findViewById(R.id.btnFinish);
-        tvStage = (TextView)findViewById(R.id.tvStage);
-        tvCompetitorNumber = (TextView)findViewById(R.id.tvCompetitorNumber);
-        tvSummaryCompetitorsAmount = (TextView)findViewById(R.id.tvSummaryCompetitorsAmount);
+        btnFinish = (Button) findViewById(R.id.btnFinish);
+        tvStage = (TextView) findViewById(R.id.tvStage);
+        tvCompetitorNumber = (TextView) findViewById(R.id.tvCompetitorNumber);
+        tvSummaryCompetitorsAmount = (TextView) findViewById(R.id.tvSummaryCompetitorsAmount);
 
         stage = (Stage) getIntent().getSerializableExtra(getResources().getString(R.string.StageAsExtra));
 
@@ -43,18 +45,17 @@ public class WorkActivity extends AppCompatActivity implements View.OnClickListe
         tvSummaryCompetitorsAmount.setText(String.valueOf(stage.getSummaryCompetitorsAmount()));
 
 
-
         // устанавливает необходимый фрагмент в зависимости от типа выбраного этапа
         // поля chronometerUsed и pointsFieldUsed используются для индикации момента, когда сукундомер будет использован и баллы введены.
         // Тогда кнопка "Далее" будет доступна
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-        switch (stage.getType()){
+        switch (stage.getType()) {
             case StopwatchAndPoints:
                 workFragment = new StopwatchPointsFragment();
                 fragmentTransaction.add(R.id.lytFragmentContainer, (Fragment) workFragment);
                 chronometerUsed = false;
                 pointsFieldUsed = false;
-                resultFieldUsed = false;
+                resultFieldUsed = true;
                 break;
             case Stopwatch:
                 workFragment = new StopwatchFragment();
@@ -73,6 +74,9 @@ public class WorkActivity extends AppCompatActivity implements View.OnClickListe
             case ResultAndTimer:
                 workFragment = new ResultTimerFragment();
                 fragmentTransaction.add(R.id.lytFragmentContainer, (Fragment) workFragment);
+                chronometerUsed = false;
+                pointsFieldUsed = true;
+                resultFieldUsed = false;
                 break;
         }
         fragmentTransaction.commit();
@@ -81,16 +85,22 @@ public class WorkActivity extends AppCompatActivity implements View.OnClickListe
 
         btnFinish.setOnClickListener(this);
 
-
         btnFinish.setEnabled(chronometerUsed && pointsFieldUsed && resultFieldUsed);
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        workFragment.setTimerDuration(stage.getTimerDuration());
+    }
+
+    @Override
     public void onClick(View v) {
-        if(v == btnFinish){
+        if (v == btnFinish) {
             Intent intent = new Intent(this, SummaryResultActivity.class);
             stage.getCurrentCompetitor().setPoints(workFragment.getPoints());
             stage.getCurrentCompetitor().setTime(workFragment.getTime());
+            stage.getCurrentCompetitor().setResult(workFragment.getResult());
 
             intent.putExtra(getResources().getString(R.string.StageAsExtra), stage);
             startActivity(intent);
@@ -101,6 +111,7 @@ public class WorkActivity extends AppCompatActivity implements View.OnClickListe
         chronometerUsed = flag;
         btnFinish.setEnabled(chronometerUsed && pointsFieldUsed && resultFieldUsed);
     }
+
     public void pointsFieldUsed(boolean flag) {
         pointsFieldUsed = flag;
         btnFinish.setEnabled(chronometerUsed && pointsFieldUsed && resultFieldUsed);
@@ -110,4 +121,12 @@ public class WorkActivity extends AppCompatActivity implements View.OnClickListe
         resultFieldUsed = flag;
         btnFinish.setEnabled(chronometerUsed && pointsFieldUsed && resultFieldUsed);
     }
+
+
+    public void saveTimerDuration(long time) {
+        stage.setTimerDuration(time);
+        workFragment.setTimerDuration(stage.getTimerDuration());
+    }
+
+
 }

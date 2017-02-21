@@ -4,6 +4,7 @@ package mb.ko.Fragments;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.os.SystemClock;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,7 +26,7 @@ public class StopwatchPointsFragment extends Fragment implements WorkFragment, V
     private Chronometer chronometer;
     private Time chronometerTime;
     private EditText etPoints;
-    private Button btnStartStop;
+    private Button btnStartStop, btnReset;
 
     private boolean boolChronometerRun;
     private WorkActivity workActivity;
@@ -41,11 +42,15 @@ public class StopwatchPointsFragment extends Fragment implements WorkFragment, V
         chronometer = (Chronometer) view.findViewById(R.id.stopwatch);
         etPoints = (EditText) view.findViewById(R.id.etPoints);
         btnStartStop = (Button) view.findViewById(R.id.btnStartStop);
+        btnReset = (Button) view.findViewById(R.id.btn_reset);
 
         btnStartStop.setOnClickListener(this);
+        btnReset.setOnClickListener(this);
         etPoints.setOnKeyListener(this);
         boolChronometerRun = false;
         etPoints.setText("");
+
+        chronometerTime = new Time(0);
 
         return view;
     }
@@ -61,15 +66,25 @@ public class StopwatchPointsFragment extends Fragment implements WorkFragment, V
     }
 
     @Override
+    public int getResult() {
+        return 0;
+    }
+
+    @Override
     public void setWorkActivity(WorkActivity workActivity) {
         this.workActivity = workActivity;
+    }
+
+    @Override
+    public void setTimerDuration(long timerDuration) {
+
     }
 
     @Override
     public void onClick(View v) {
         if (v == btnStartStop) {
             if (!boolChronometerRun) {
-                chronometer.setBase(SystemClock.elapsedRealtime());
+                chronometer.setBase(SystemClock.elapsedRealtime() - chronometerTime.getTime());
                 chronometer.start();
                 btnStartStop.setText(getResources().getString(R.string.line_STOP));
                 boolChronometerRun = true;
@@ -80,6 +95,12 @@ public class StopwatchPointsFragment extends Fragment implements WorkFragment, V
                 boolChronometerRun = false;
                 workActivity.chronometerUsed(true);
             }
+        } else if(v == btnReset){
+            chronometer.stop();
+            chronometerTime = new Time(0);
+            btnStartStop.setText(getResources().getString(R.string.line_START));
+            chronometer.setBase(SystemClock.elapsedRealtime());
+            boolChronometerRun = false;
         }
     }
 

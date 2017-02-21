@@ -14,6 +14,7 @@ import android.widget.EditText;
 
 import mb.ko.R;
 import mb.ko.Stage;
+import mb.ko.WorkActivityType;
 
 public class StageNumberActivity extends AppCompatActivity implements View.OnKeyListener, View.OnClickListener {
     private EditText etStage;
@@ -40,7 +41,7 @@ public class StageNumberActivity extends AppCompatActivity implements View.OnKey
 
         if (v == etStage && event.getKeyCode() == KeyEvent.KEYCODE_ENTER && event.getAction() == KeyEvent.ACTION_UP)
             if (etStage.getText().length() > 0)
-            next();
+                next();
 
         return false;
     }
@@ -54,13 +55,29 @@ public class StageNumberActivity extends AppCompatActivity implements View.OnKey
     }
 
     private void next() {
-        Intent intent = new Intent(this, CompetitorNumberActivity.class);
 
-        Integer stageNumber = Integer.decode(etStage.getText().toString());
+
         Stage stage = (Stage) getIntent().getSerializableExtra(getResources().getString(R.string.StageAsExtra));
-        stage.setNumber(stageNumber);
-        intent.putExtra(getResources().getString(R.string.StageAsExtra), stage);
 
-        startActivity(intent);
+        if (stage.getType() == WorkActivityType.ResultPointsAndTimer || stage.getType() == WorkActivityType.ResultAndTimer) {
+
+            Intent intent = new Intent(this, TimerActivity.class);
+
+            Integer stageNumber = Integer.decode(etStage.getText().toString());
+            stage.setNumber(stageNumber);
+            intent.putExtra(getResources().getString(R.string.StageAsExtra), stage);
+            intent.putExtra(getResources().getString(R.string.timer_time), getResources().getString(R.string.without_result));
+
+            startActivity(intent);
+        } else {
+
+            Intent intent = new Intent(this, CompetitorNumberActivity.class);
+
+            Integer stageNumber = Integer.decode(etStage.getText().toString());
+            stage.setNumber(stageNumber);
+            intent.putExtra(getResources().getString(R.string.StageAsExtra), stage);
+
+            startActivity(intent);
+        }
     }
 }

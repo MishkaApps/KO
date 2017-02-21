@@ -23,7 +23,7 @@ public class StopwatchFragment extends Fragment implements WorkFragment, View.On
     private WorkActivity workActivity;
     private Chronometer chronometer;
     private Time chronometerTime;
-    private Button btnStartStop;
+    private Button btnStartStop, btnReset;
 
     private boolean boolChronometerRun;
 
@@ -39,9 +39,13 @@ public class StopwatchFragment extends Fragment implements WorkFragment, View.On
         View view = inflater.inflate(R.layout.fragment_stopwatch, container, false);
         chronometer = (Chronometer) view.findViewById(R.id.stopwatch);
         btnStartStop = (Button) view.findViewById(R.id.btnStartStop);
+        btnReset = (Button) view.findViewById(R.id.btn_reset);
 
         btnStartStop.setOnClickListener(this);
+        btnReset.setOnClickListener(this);
         boolChronometerRun = false;
+
+        chronometerTime = new Time(0);
 
         return view;
     }
@@ -57,15 +61,25 @@ public class StopwatchFragment extends Fragment implements WorkFragment, View.On
     }
 
     @Override
+    public int getResult() {
+        return 0;
+    }
+
+    @Override
     public void setWorkActivity(WorkActivity workActivity) {
         this.workActivity = workActivity;
+    }
+
+    @Override
+    public void setTimerDuration(long timerDuration) {
+
     }
 
     @Override
     public void onClick(View v) {
         if (v == btnStartStop) {
             if (!boolChronometerRun) {
-                chronometer.setBase(SystemClock.elapsedRealtime());
+                chronometer.setBase(SystemClock.elapsedRealtime() - chronometerTime.getTime());
                 chronometer.start();
                 btnStartStop.setText(getResources().getString(R.string.line_STOP));
                 boolChronometerRun = true;
@@ -76,6 +90,15 @@ public class StopwatchFragment extends Fragment implements WorkFragment, View.On
                 boolChronometerRun = false;
                 workActivity.chronometerUsed(true);
             }
+        }
+
+        if(v == btnReset){
+
+            chronometer.stop();
+            chronometerTime = new Time(0);
+            btnStartStop.setText(getResources().getString(R.string.line_START));
+            chronometer.setBase(SystemClock.elapsedRealtime());
+            boolChronometerRun = false;
         }
     }
 }

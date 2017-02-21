@@ -24,6 +24,16 @@
             android:gravity="center"
             android:orientation="horizontal">
 
+            <Button
+                android:id="@+id/btn_reset"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
+                android:background="@color/colorButtonBackground"
+                android:text="@string/btnReset" />
+
             <Chronometer
                 android:id="@+id/stopwatch"
                 android:layout_width="0dp"

@@ -13,6 +13,7 @@ public class Stage implements Serializable{
     private WorkActivityType type;
     private int number;
     private HashMap<Integer, Competitor> competitors;
+    private long timerDuration;
 
     public Competitor getCurrentCompetitor() {
         return currentCompetitor;
@@ -55,4 +56,11 @@ public class Stage implements Serializable{
         return competitors.size();
     }
 
+    public void setTimerDuration(long time) {
+        this.timerDuration = time;
+    }
+
+    public long getTimerDuration() {
+        return timerDuration;
+    }
 }

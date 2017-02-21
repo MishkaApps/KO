@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="mb.ko.Fragments.ResultTimerFragment">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -38,7 +39,7 @@
                 android:layout_weight="0.5" />
 
             <EditText
-                android:id="@+id/etPoints"
+                android:id="@+id/etResult"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -59,10 +60,18 @@
             android:background="@color/colorSeparator" />
 
 
+
         <ImageView
             android:id="@+id/imageView3"
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="@dimen/separator_line_thickness"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@color/colorSeparator" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/separator_line_thickness"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:background="@color/colorSeparator" />
@@ -76,11 +85,44 @@
             android:orientation="horizontal">
 
             <Button
-                android:layout_width="wrap_content"
+                android:id="@+id/btnReset"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Таймер"
-                android:id="@+id/btnTimerTimer" />
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/btnReset" />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.2" />
+
+
+            <mb.ko.Timer
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="00:00"
+                android:id="@+id/timer"/>
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.2" />
+
+            <Button
+                android:id="@+id/btnStartStop"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/button_start_stop_time" />
 
         </LinearLayout>
+
     </LinearLayout>
+
 </FrameLayout>

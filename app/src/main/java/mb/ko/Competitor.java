@@ -11,6 +11,7 @@ public class Competitor implements Serializable{
     private int id;
     private int points;
     private Time time;
+    private int result;
 
     public Competitor(int id) {
         this.id = id;
@@ -40,5 +41,13 @@ public class Competitor implements Serializable{
         return String.format(Time.getFormat(),
                 TimeUnit.MILLISECONDS.toMinutes(time.getTime()),
                 TimeUnit.MILLISECONDS.toSeconds(time.getTime()) - TimeUnit.MILLISECONDS.toSeconds(TimeUnit.MILLISECONDS.toMinutes(time.getTime())));
+    }
+
+    public void setResult(int result) {
+        this.result = result;
+    }
+
+    public int getResult() {
+        return result;
     }
 }

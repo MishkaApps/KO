@@ -19,7 +19,8 @@
         <activity android:name=".Activities.WorkActivity" />
         <activity android:name=".Activities.SummaryResultActivity" />
         <activity android:name=".Activities.StageNumberActivity" />
-        <activity android:name=".Activities.TimerActivity"></activity>
+        <activity android:name=".Activities.TimerActivity" />
+        <activity android:name=".Activities.TimerSettingsActivity"></activity>
     </application>
 
 </manifest>

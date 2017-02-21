@@ -28,4 +28,6 @@
     <string name="btnReset">Сброс</string>
     <string name="btnOk">Ок</string>
     <string name="timer_time">TIME</string>
+    <string name="without_result">WITHOUT_RESULT</string>
+    <string name="with_result">WITH_RESULT</string>
 </resources>

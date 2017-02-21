@@ -52,12 +52,12 @@ public class Timer extends TextView {
 
     }
 
-    public void setStartStopButton(Button btnStartStop){
+    public void setStartStopButton(Button btnStartStop) {
         this.btnStartStop = btnStartStop;
     }
 
     public void start() {
-        if (currentTime == 0){
+        if (currentTime == 0) {
             timer = createTimer(duration);
             timer.start();
             btnStartStop.setText(getResources().getString(R.string.line_STOP));
@@ -75,8 +75,9 @@ public class Timer extends TextView {
         run = false;
     }
 
-    public void reset(){
-        stop();
+    public void reset() {
+        if (timer != null)
+            stop();
         setText(time.formatTime(duration));
         currentTime = 0;
     }
