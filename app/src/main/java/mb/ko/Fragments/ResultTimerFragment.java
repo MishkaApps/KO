@@ -99,6 +99,10 @@ public class ResultTimerFragment extends Fragment implements View.OnClickListene
     }
 
     @Override
+    public boolean getPass() {
+        return false;
+    }
+    @Override
     public void setWorkActivity(WorkActivity workActivity) {
         this.workActivity = workActivity;
     }

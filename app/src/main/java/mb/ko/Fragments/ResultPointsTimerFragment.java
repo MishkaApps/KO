@@ -102,6 +102,11 @@ public class ResultPointsTimerFragment extends Fragment implements View.OnClickL
     }
 
     @Override
+    public boolean getPass() {
+        return false;
+    }
+
+    @Override
     public void setWorkActivity(WorkActivity workActivity) {
         this.workActivity = workActivity;
     }

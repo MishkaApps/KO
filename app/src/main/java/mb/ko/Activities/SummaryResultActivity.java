@@ -18,7 +18,7 @@ import mb.ko.Stage;
 
 public class SummaryResultActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private TextView tvStage, tvSummaryCompetitorsAmount, tvTime, tvPoints, tvResult, tvCompetitorNumber;
+    private TextView tvStage, tvSummaryCompetitorsAmount, tvTime, tvPoints, tvResult, tvCompetitorNumber, tvPassed;
     private Button btnNext;
 
     @Override
@@ -32,6 +32,7 @@ public class SummaryResultActivity extends AppCompatActivity implements View.OnC
         tvPoints = (TextView) findViewById(R.id.tvPoints);
         tvResult = (TextView) findViewById(R.id.tvResult);
         tvTime = (TextView) findViewById(R.id.tvTime);
+        tvPassed = (TextView) findViewById(R.id.tvPassed);
 
         Stage stage = (Stage) getIntent().getSerializableExtra(getResources().getString(R.string.StageAsExtra));
 
@@ -43,23 +44,33 @@ public class SummaryResultActivity extends AppCompatActivity implements View.OnC
         switch (stage.getType()) {
             case StopwatchAndPoints:
                 findViewById(R.id.lytSummaryResultResult).setVisibility(View.GONE);
+                findViewById(R.id.lytSummaryResultPassed).setVisibility(View.GONE);
                 tvPoints.setText(String.valueOf(stage.getCurrentCompetitor().getPoints()));
                 tvTime.setText((stage.getCurrentCompetitor().getTime()));
                 break;
             case Stopwatch:
                 findViewById(R.id.lytSummaryResultPoints).setVisibility(View.GONE);
                 findViewById(R.id.lytSummaryResultResult).setVisibility(View.GONE);
+                findViewById(R.id.lytSummaryResultPassed).setVisibility(View.GONE);
                 tvTime.setText((stage.getCurrentCompetitor().getTime()));
                 break;
             case ResultPointsAndTimer:
                 findViewById(R.id.lytSummaryResultTime).setVisibility(View.GONE);
+                findViewById(R.id.lytSummaryResultPassed).setVisibility(View.GONE);
                 tvPoints.setText(String.valueOf(stage.getCurrentCompetitor().getPoints()));
                 tvResult.setText(String.valueOf(stage.getCurrentCompetitor().getResult()));
                 break;
             case ResultAndTimer:
                 findViewById(R.id.lytSummaryResultTime).setVisibility(View.GONE);
                 findViewById(R.id.lytSummaryResultPoints).setVisibility(View.GONE);
+                findViewById(R.id.lytSummaryResultPassed).setVisibility(View.GONE);
                 tvResult.setText(String.valueOf(stage.getCurrentCompetitor().getResult()));
+                break;
+            case Pass:
+                findViewById(R.id.lytSummaryResultTime).setVisibility(View.GONE);
+                findViewById(R.id.lytSummaryResultPoints).setVisibility(View.GONE);
+                findViewById(R.id.lytSummaryResultResult).setVisibility(View.GONE);
+                tvPassed.setText(String.valueOf(stage.getCurrentCompetitor().getPassedString()));
                 break;
         }
 

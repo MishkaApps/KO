@@ -12,6 +12,7 @@ public class Competitor implements Serializable{
     private int points;
     private Time time;
     private int result;
+    private boolean passed;
 
     public Competitor(int id) {
         this.id = id;
@@ -49,5 +50,17 @@ public class Competitor implements Serializable{
 
     public int getResult() {
         return result;
+    }
+
+    public void setPass(boolean passed) {
+        this.passed = passed;
+    }
+
+    public boolean getPassed() {
+        return passed;
+    }
+
+    public String getPassedString() {
+        return passed?"Прошел":"Не прошел";
     }
 }

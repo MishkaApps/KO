@@ -30,4 +30,7 @@
     <string name="timer_time">TIME</string>
     <string name="without_result">WITHOUT_RESULT</string>
     <string name="with_result">WITH_RESULT</string>
+    <string name="set_timer">Введите время</string>
+    <string name="competitor_pass">Участник прошел</string>
+    <string name="competitor_not_pass">Участник не прошел</string>
 </resources>

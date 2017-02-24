@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import mb.ko.Fragments.PassFragment;
 import mb.ko.Fragments.ResultPointsTimerFragment;
 import mb.ko.Fragments.ResultTimerFragment;
 import mb.ko.Fragments.StopwatchFragment;
@@ -25,7 +26,7 @@ public class WorkActivity extends AppCompatActivity implements View.OnClickListe
     private TextView tvStage, tvCompetitorNumber, tvSummaryCompetitorsAmount;
     private Stage stage;
     private WorkFragment workFragment;
-    private boolean chronometerUsed, pointsFieldUsed, resultFieldUsed;
+    private boolean chronometerUsed, pointsFieldUsed, resultFieldUsed, radioGroupUsed;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +57,7 @@ public class WorkActivity extends AppCompatActivity implements View.OnClickListe
                 chronometerUsed = false;
                 pointsFieldUsed = false;
                 resultFieldUsed = true;
+                radioGroupUsed = true;
                 break;
             case Stopwatch:
                 workFragment = new StopwatchFragment();
@@ -63,6 +65,7 @@ public class WorkActivity extends AppCompatActivity implements View.OnClickListe
                 chronometerUsed = false;
                 pointsFieldUsed = true;
                 resultFieldUsed = true;
+                radioGroupUsed = true;
                 break;
             case ResultPointsAndTimer:
                 workFragment = new ResultPointsTimerFragment();
@@ -70,6 +73,7 @@ public class WorkActivity extends AppCompatActivity implements View.OnClickListe
                 chronometerUsed = false;
                 pointsFieldUsed = false;
                 resultFieldUsed = false;
+                radioGroupUsed = true;
                 break;
             case ResultAndTimer:
                 workFragment = new ResultTimerFragment();
@@ -77,6 +81,15 @@ public class WorkActivity extends AppCompatActivity implements View.OnClickListe
                 chronometerUsed = false;
                 pointsFieldUsed = true;
                 resultFieldUsed = false;
+                radioGroupUsed = true;
+                break;
+            case Pass:
+                workFragment = new PassFragment();
+                fragmentTransaction.add(R.id.lytFragmentContainer, (Fragment) workFragment);
+                chronometerUsed = false;
+                pointsFieldUsed = true;
+                resultFieldUsed = true;
+                radioGroupUsed = false;
                 break;
         }
         fragmentTransaction.commit();
@@ -101,6 +114,7 @@ public class WorkActivity extends AppCompatActivity implements View.OnClickListe
             stage.getCurrentCompetitor().setPoints(workFragment.getPoints());
             stage.getCurrentCompetitor().setTime(workFragment.getTime());
             stage.getCurrentCompetitor().setResult(workFragment.getResult());
+            stage.getCurrentCompetitor().setPass(workFragment.getPass());
 
             intent.putExtra(getResources().getString(R.string.StageAsExtra), stage);
             startActivity(intent);
@@ -109,17 +123,22 @@ public class WorkActivity extends AppCompatActivity implements View.OnClickListe
 
     public void chronometerUsed(boolean flag) {
         chronometerUsed = flag;
-        btnFinish.setEnabled(chronometerUsed && pointsFieldUsed && resultFieldUsed);
+        btnFinish.setEnabled(chronometerUsed && pointsFieldUsed && resultFieldUsed && radioGroupUsed);
     }
 
     public void pointsFieldUsed(boolean flag) {
         pointsFieldUsed = flag;
-        btnFinish.setEnabled(chronometerUsed && pointsFieldUsed && resultFieldUsed);
+        btnFinish.setEnabled(chronometerUsed && pointsFieldUsed && resultFieldUsed && radioGroupUsed);
     }
 
     public void resultFieldUsed(boolean flag) {
         resultFieldUsed = flag;
-        btnFinish.setEnabled(chronometerUsed && pointsFieldUsed && resultFieldUsed);
+        btnFinish.setEnabled(chronometerUsed && pointsFieldUsed && resultFieldUsed && radioGroupUsed);
+    }
+
+    public void radioGroupUsed(boolean flag) {
+        radioGroupUsed = flag;
+        btnFinish.setEnabled(chronometerUsed && pointsFieldUsed && resultFieldUsed && radioGroupUsed);
     }
 
 

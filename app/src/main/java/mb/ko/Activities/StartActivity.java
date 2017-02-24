@@ -12,7 +12,7 @@ import mb.ko.WorkActivityType;
 
 public class StartActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private Button btnTimePlusPoints, btnTime, btnResultPlusPoints, btnResult;
+    private Button btnTimePlusPoints, btnTime, btnResultPlusPoints, btnResult, btnPass;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +30,9 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
 
         btnResult = (Button)findViewById(R.id.btnResultPlusTimer);
         btnResult.setOnClickListener(this);
+
+        btnPass = (Button)findViewById(R.id.btn_pass);
+        btnPass.setOnClickListener(this);
     }
 
     @Override
@@ -47,6 +50,9 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
                 break;
             case R.id.btnResultPlusTimer:
                 intent.putExtra(getResources().getString(R.string.StageAsExtra), new Stage(WorkActivityType.ResultAndTimer));
+                break;
+            case R.id.btn_pass:
+                intent.putExtra(getResources().getString(R.string.StageAsExtra), new Stage(WorkActivityType.Pass));
                 break;
 
 

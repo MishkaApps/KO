@@ -20,7 +20,8 @@
         <activity android:name=".Activities.SummaryResultActivity" />
         <activity android:name=".Activities.StageNumberActivity" />
         <activity android:name=".Activities.TimerActivity" />
-        <activity android:name=".Activities.TimerSettingsActivity"></activity>
+        <activity android:name=".Activities.TimerSettingsActivity" />
+        <activity android:name=".Fragments.PassActivity"></activity>
     </application>
 
 </manifest>

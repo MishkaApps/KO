@@ -59,7 +59,9 @@ public class StageNumberActivity extends AppCompatActivity implements View.OnKey
 
         Stage stage = (Stage) getIntent().getSerializableExtra(getResources().getString(R.string.StageAsExtra));
 
-        if (stage.getType() == WorkActivityType.ResultPointsAndTimer || stage.getType() == WorkActivityType.ResultAndTimer) {
+        if (stage.getType() == WorkActivityType.ResultPointsAndTimer
+                || stage.getType() == WorkActivityType.ResultAndTimer
+                || stage.getType() == WorkActivityType.Pass) {
 
             Intent intent = new Intent(this, TimerActivity.class);
 

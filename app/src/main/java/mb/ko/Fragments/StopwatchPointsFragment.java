@@ -71,6 +71,10 @@ public class StopwatchPointsFragment extends Fragment implements WorkFragment, V
     }
 
     @Override
+    public boolean getPass() {
+        return false;
+    }
+    @Override
     public void setWorkActivity(WorkActivity workActivity) {
         this.workActivity = workActivity;
     }
