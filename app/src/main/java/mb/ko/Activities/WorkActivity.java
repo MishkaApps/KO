@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import mb.ko.Fragments.PassFragment;
@@ -27,6 +28,7 @@ public class WorkActivity extends AppCompatActivity implements View.OnClickListe
     private Stage stage;
     private WorkFragment workFragment;
     private boolean chronometerUsed, pointsFieldUsed, resultFieldUsed, radioGroupUsed;
+    private CheckBox cbxSuccess;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +40,7 @@ public class WorkActivity extends AppCompatActivity implements View.OnClickListe
         tvStage = (TextView) findViewById(R.id.tvStage);
         tvCompetitorNumber = (TextView) findViewById(R.id.tvCompetitorNumber);
         tvSummaryCompetitorsAmount = (TextView) findViewById(R.id.tvSummaryCompetitorsAmount);
+        cbxSuccess = (CheckBox) findViewById(R.id.cbxSuccess);
 
         stage = (Stage) getIntent().getSerializableExtra(getResources().getString(R.string.StageAsExtra));
 
@@ -90,6 +93,7 @@ public class WorkActivity extends AppCompatActivity implements View.OnClickListe
                 pointsFieldUsed = true;
                 resultFieldUsed = true;
                 radioGroupUsed = false;
+                cbxSuccess.setVisibility(View.GONE);
                 break;
         }
         fragmentTransaction.commit();
@@ -115,6 +119,10 @@ public class WorkActivity extends AppCompatActivity implements View.OnClickListe
             stage.getCurrentCompetitor().setTime(workFragment.getTime());
             stage.getCurrentCompetitor().setResult(workFragment.getResult());
             stage.getCurrentCompetitor().setPass(workFragment.getPass());
+            if (stage.getType() != WorkActivityType.Pass)
+                stage.getCurrentCompetitor().setSuccess(cbxSuccess.isChecked());
+            else
+                stage.getCurrentCompetitor().setSuccess(workFragment.getPass());
 
             intent.putExtra(getResources().getString(R.string.StageAsExtra), stage);
             startActivity(intent);

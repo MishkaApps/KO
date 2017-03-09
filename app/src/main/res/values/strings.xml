@@ -33,4 +33,5 @@
     <string name="set_timer">Введите время</string>
     <string name="competitor_pass">Участник прошел</string>
     <string name="competitor_not_pass">Участник не прошел</string>
+    <string name="success">Прошел</string>
 </resources>

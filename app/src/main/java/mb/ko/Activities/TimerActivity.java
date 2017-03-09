@@ -45,7 +45,7 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
 
                     Stage stage = (Stage) getIntent().getSerializableExtra(getResources().getString(R.string.StageAsExtra));
                     Intent intent;
-                        intent = new Intent(this, CompetitorNumberActivity.class);
+                    intent = new Intent(this, CompetitorNumberActivity.class);
                     long time = Integer.decode(etMinutes.getText().toString()) * 60000 + Integer.decode(etSeconds.getText().toString()) * 1000;
 
                     stage.setTimerDuration(time);

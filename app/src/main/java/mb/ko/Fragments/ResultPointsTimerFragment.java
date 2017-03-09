@@ -73,6 +73,7 @@ public class ResultPointsTimerFragment extends Fragment implements View.OnClickL
         }
 
         if (v == timer) {
+            timer.reset();
             Intent intent = new Intent(getActivity(), TimerActivity.class);
             intent.putExtra(getResources().getString(R.string.timer_time), getResources().getString(R.string.with_result));
             startActivityForResult(intent, getResources().getInteger(R.integer.set_timer_time));
@@ -114,6 +115,10 @@ public class ResultPointsTimerFragment extends Fragment implements View.OnClickL
     @Override
     public void setTimerDuration(long timerDuration) {
         timer.setTimerParameters(timerDuration, workActivity.getResources().getInteger(R.integer.timer_tick_period));
+        boolean flag = timerDuration == 0L;
+        workActivity.chronometerUsed(flag);
+        btnStartStop.setEnabled(!flag);
+        btnReset.setEnabled(!flag);
     }
 
     @Override
