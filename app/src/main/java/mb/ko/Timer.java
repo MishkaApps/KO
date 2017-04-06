@@ -7,6 +7,8 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 
+import mb.ko.Fragments.PassFragment;
+
 /**
  * Created by mbolg on 14.02.2017.
  */
@@ -17,11 +19,14 @@ public class Timer extends TextView {
     private Time time;
     private long currentTime;
     private Button btnStartStop;
+    private ChronometerListener chronometerListener;
+    private boolean cycle;
 
     public Timer(Context context, AttributeSet attrs) {
         super(context, attrs);
         time = new Time();
         currentTime = 0;
+        cycle = false;
 
     }
 
@@ -37,10 +42,15 @@ public class Timer extends TextView {
 
             @Override
             public void onFinish() {
-                setText("00:00");
-                currentTime = 0;
-                btnStartStop.setText(getResources().getString(R.string.line_START));
-                run = false;
+                if (!cycle) {
+                    setText("00:00");
+                    currentTime = 0;
+                    btnStartStop.setText(getResources().getString(R.string.line_START));
+                    chronometerListener.chronometerUsed(true);
+                    run = false;
+                } else {
+                    start();
+                }
             }
         };
     }
@@ -88,5 +98,13 @@ public class Timer extends TextView {
 
     public void setDuration(long duration) {
         this.duration = duration;
+    }
+
+    public void setChronometerListener(ChronometerListener chronometerListener) {
+        this.chronometerListener = chronometerListener;
+    }
+
+    public void cycle() {
+        this.cycle = true;
     }
 }

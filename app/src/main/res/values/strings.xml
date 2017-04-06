@@ -9,10 +9,12 @@
     <string name="btn_mode_moose_races">Лосинные бега</string>
 
     <string name="label_stage">Этап</string>
-    <string name="label_membership_number">Номер участника</string>
+    <string name="label_competitor_number">Номер участника</string>
+    <string name="label_team_number">Номер команды</string>
     <string name="label_all_participants">Всего</string>
     <string name="button_start_stop_time">Старт</string>
     <string name="button_finish">Записать результат</string>
+    <string name="button_save_time">Записать время</string>
     <string name="label_points">Баллы</string>
     <string name="label_time">Время</string>
     <string name="btnNext">Далее</string>
@@ -33,5 +35,5 @@
     <string name="set_timer">Введите время</string>
     <string name="competitor_pass">Участник прошел</string>
     <string name="competitor_not_pass">Участник не прошел</string>
-    <string name="success">Прошел</string>
+    <string name="competitor_fails">Не прошел</string>
 </resources>

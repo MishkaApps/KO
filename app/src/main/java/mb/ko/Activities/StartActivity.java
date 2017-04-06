@@ -3,6 +3,7 @@ package mb.ko.Activities;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -12,7 +13,7 @@ import mb.ko.WorkActivityType;
 
 public class StartActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private Button btnTimePlusPoints, btnTime, btnResultPlusPoints, btnResult, btnPass;
+    private Button btnTimePlusPoints, btnTime, btnResultPlusPoints, btnResult, btnPass, btnMooseRaces;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,11 +34,15 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
 
         btnPass = (Button)findViewById(R.id.btn_pass);
         btnPass.setOnClickListener(this);
+
+        btnMooseRaces = (Button)findViewById(R.id.btn_moose_races);
+        btnMooseRaces.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         Intent intent = new Intent(this, StageNumberActivity.class);
+
         switch(v.getId()){
             case R.id.btnTimePlusPoints:
                 intent.putExtra(getResources().getString(R.string.StageAsExtra), new Stage(WorkActivityType.StopwatchAndPoints));
@@ -53,6 +58,9 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
                 break;
             case R.id.btn_pass:
                 intent.putExtra(getResources().getString(R.string.StageAsExtra), new Stage(WorkActivityType.Pass));
+                break;
+            case R.id.btn_moose_races:
+                intent.putExtra(getResources().getString(R.string.StageAsExtra), new Stage(WorkActivityType.MooseRaces));
                 break;
 
 

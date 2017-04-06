@@ -71,7 +71,7 @@ public class CompetitorNumberActivity extends AppCompatActivity implements View.
         startActivity(intent);
     }
 
-    private boolean isNumberValid(String number){
+    public static boolean isNumberValid(String number){
         char[] chars = number.toCharArray();
 
         if(chars.length == 0)

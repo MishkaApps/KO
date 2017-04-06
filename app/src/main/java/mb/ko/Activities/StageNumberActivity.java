@@ -61,7 +61,8 @@ public class StageNumberActivity extends AppCompatActivity implements View.OnKey
 
         if (stage.getType() == WorkActivityType.ResultPointsAndTimer
                 || stage.getType() == WorkActivityType.ResultAndTimer
-                || stage.getType() == WorkActivityType.Pass) {
+                || stage.getType() == WorkActivityType.Pass
+                || stage.getType() == WorkActivityType.MooseRaces) {
 
             Intent intent = new Intent(this, TimerActivity.class);
 

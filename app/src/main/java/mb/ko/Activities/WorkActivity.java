@@ -9,8 +9,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import mb.ko.Fragments.MooseRacesFragment;
 import mb.ko.Fragments.PassFragment;
 import mb.ko.Fragments.ResultPointsTimerFragment;
 import mb.ko.Fragments.ResultTimerFragment;
@@ -45,7 +47,8 @@ public class WorkActivity extends AppCompatActivity implements View.OnClickListe
         stage = (Stage) getIntent().getSerializableExtra(getResources().getString(R.string.StageAsExtra));
 
         tvStage.setText(String.valueOf(stage.getNumber()));
-        tvCompetitorNumber.setText(String.valueOf(stage.getCompetitorNumber()));
+        if (stage.getType() != WorkActivityType.MooseRaces)
+            tvCompetitorNumber.setText(String.valueOf(stage.getCompetitorNumber()));
         tvSummaryCompetitorsAmount.setText(String.valueOf(stage.getSummaryCompetitorsAmount()));
 
 
@@ -94,6 +97,17 @@ public class WorkActivity extends AppCompatActivity implements View.OnClickListe
                 resultFieldUsed = true;
                 radioGroupUsed = false;
                 cbxSuccess.setVisibility(View.GONE);
+                break;
+            case MooseRaces:
+                workFragment = new MooseRacesFragment();
+                fragmentTransaction.add(R.id.lytFragmentContainer, (Fragment) workFragment);
+                chronometerUsed = true;
+                pointsFieldUsed = true;
+                resultFieldUsed = true;
+                radioGroupUsed = true;
+                findViewById(R.id.lyt_cbx_success).setVisibility(View.GONE);
+                btnFinish.setVisibility(View.GONE);
+                findViewById(R.id.lyt_competitor_number).setVisibility(View.GONE);
                 break;
         }
         fragmentTransaction.commit();

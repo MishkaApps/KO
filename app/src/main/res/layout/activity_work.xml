@@ -48,12 +48,13 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:gravity="center">
+                android:gravity="center"
+                android:id="@+id/lyt_competitor_number">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/label_membership_number"
+                    android:text="@string/label_competitor_number"
                     android:id="@+id/textView4"
                     android:layout_gravity="center" />
 
@@ -109,12 +110,13 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.5">
+            android:layout_weight="0.5"
+            android:id="@+id/lyt_cbx_success">
 
             <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/success"
+                android:text="@string/competitor_fails"
                 android:id="@+id/cbxSuccess"
                 android:layout_gravity="center" />
         </FrameLayout>

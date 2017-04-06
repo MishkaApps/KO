@@ -13,6 +13,7 @@ import android.widget.EditText;
 
 import mb.ko.Activities.TimerActivity;
 import mb.ko.Activities.WorkActivity;
+import mb.ko.ChronometerListener;
 import mb.ko.R;
 import mb.ko.Time;
 import mb.ko.Timer;
@@ -21,7 +22,7 @@ import mb.ko.WorkFragment;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ResultPointsTimerFragment extends Fragment implements View.OnClickListener, WorkFragment, View.OnKeyListener {
+public class ResultPointsTimerFragment extends Fragment implements View.OnClickListener, WorkFragment, View.OnKeyListener, ChronometerListener {
     private EditText etResult, etPoints;
     private Button btnStartStop, btnReset;
     private Timer timer;
@@ -48,6 +49,7 @@ public class ResultPointsTimerFragment extends Fragment implements View.OnClickL
         etPoints.setOnKeyListener(this);
         etResult.setOnKeyListener(this);
         timer.setOnClickListener(this);
+        timer.setChronometerListener(this);
         etPoints.setText("");
         etResult.setText("");
 
@@ -136,5 +138,10 @@ public class ResultPointsTimerFragment extends Fragment implements View.OnClickL
                 workActivity.resultFieldUsed(false);
 
         return false;
+    }
+
+    @Override
+    public void chronometerUsed(boolean flag) {
+        workActivity.chronometerUsed(flag);
     }
 }
