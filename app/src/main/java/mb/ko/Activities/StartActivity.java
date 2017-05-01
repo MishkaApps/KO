@@ -1,13 +1,24 @@
 package mb.ko.Activities;
 
 import android.content.Intent;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import mb.ko.R;
+import mb.ko.ResultWriter;
 import mb.ko.Stage;
 import mb.ko.WorkActivityType;
 
@@ -37,6 +48,8 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
 
         btnMooseRaces = (Button)findViewById(R.id.btn_moose_races);
         btnMooseRaces.setOnClickListener(this);
+
+        ResultWriter.createResultsFile();
     }
 
     @Override

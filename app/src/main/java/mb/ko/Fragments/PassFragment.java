@@ -24,7 +24,6 @@ import mb.ko.WorkFragment;
 public class PassFragment extends Fragment implements View.OnClickListener, WorkFragment, ChronometerListener {
     private Button btnStartStop, btnReset;
     private Timer timer;
-    private RadioButton rbtnPass, rbtnNotPass;
     private WorkActivity workActivity;
 
 
@@ -40,15 +39,6 @@ public class PassFragment extends Fragment implements View.OnClickListener, Work
         btnReset = (Button) view.findViewById(R.id.btnReset);
         timer = (Timer) view.findViewById(R.id.timer);
         timer.setStartStopButton(btnStartStop);
-
-        rbtnPass = (RadioButton) view.findViewById(R.id.rbtn_pass);
-        rbtnNotPass = (RadioButton) view.findViewById(R.id.rbtn_not_pass);
-
-        rbtnPass.setOnClickListener(this);
-        rbtnNotPass.setOnClickListener(this);
-
-        rbtnPass.setChecked(false);
-        rbtnNotPass.setChecked(false);
 
         btnStartStop.setOnClickListener(this);
         btnReset.setOnClickListener(this);
@@ -83,9 +73,6 @@ public class PassFragment extends Fragment implements View.OnClickListener, Work
             startActivityForResult(intent, getResources().getInteger(R.integer.set_timer_time));
         }
 
-        if(v == rbtnPass || v == rbtnNotPass)
-            workActivity.radioGroupUsed(true);
-
     }
 
     @Override
@@ -109,10 +96,6 @@ public class PassFragment extends Fragment implements View.OnClickListener, Work
         return 0;
     }
 
-    @Override
-    public boolean getPass() {
-        return rbtnPass.isChecked();
-    }
 
     @Override
     public void setWorkActivity(WorkActivity workActivity) {

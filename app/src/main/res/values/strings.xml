@@ -22,6 +22,8 @@
     <string name="line_START">СТАРТ</string>
     <string name="line_STOP">СТОП</string>
 
+    <string name="results_filename">results.txt</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="StageAsExtra">STAGE</string>

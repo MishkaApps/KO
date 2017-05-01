@@ -5,13 +5,12 @@ import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import mb.ko.Competitor;
 import mb.ko.Fragments.MooseRacesFragment;
 import mb.ko.Fragments.PassFragment;
 import mb.ko.Fragments.ResultPointsTimerFragment;
@@ -19,6 +18,7 @@ import mb.ko.Fragments.ResultTimerFragment;
 import mb.ko.Fragments.StopwatchFragment;
 import mb.ko.R;
 import mb.ko.Fragments.StopwatchPointsFragment;
+import mb.ko.ResultWriter;
 import mb.ko.Stage;
 import mb.ko.WorkActivityType;
 import mb.ko.WorkFragment;
@@ -29,7 +29,7 @@ public class WorkActivity extends AppCompatActivity implements View.OnClickListe
     private TextView tvStage, tvCompetitorNumber, tvSummaryCompetitorsAmount;
     private Stage stage;
     private WorkFragment workFragment;
-    private boolean chronometerUsed, pointsFieldUsed, resultFieldUsed, radioGroupUsed;
+    private boolean chronometerUsed, pointsFieldUsed, resultFieldUsed;
     private CheckBox cbxSuccess;
 
     @Override
@@ -63,7 +63,6 @@ public class WorkActivity extends AppCompatActivity implements View.OnClickListe
                 chronometerUsed = false;
                 pointsFieldUsed = false;
                 resultFieldUsed = true;
-                radioGroupUsed = true;
                 break;
             case Stopwatch:
                 workFragment = new StopwatchFragment();
@@ -71,7 +70,6 @@ public class WorkActivity extends AppCompatActivity implements View.OnClickListe
                 chronometerUsed = false;
                 pointsFieldUsed = true;
                 resultFieldUsed = true;
-                radioGroupUsed = true;
                 break;
             case ResultPointsAndTimer:
                 workFragment = new ResultPointsTimerFragment();
@@ -79,7 +77,6 @@ public class WorkActivity extends AppCompatActivity implements View.OnClickListe
                 chronometerUsed = false;
                 pointsFieldUsed = false;
                 resultFieldUsed = false;
-                radioGroupUsed = true;
                 break;
             case ResultAndTimer:
                 workFragment = new ResultTimerFragment();
@@ -87,7 +84,6 @@ public class WorkActivity extends AppCompatActivity implements View.OnClickListe
                 chronometerUsed = false;
                 pointsFieldUsed = true;
                 resultFieldUsed = false;
-                radioGroupUsed = true;
                 break;
             case Pass:
                 workFragment = new PassFragment();
@@ -95,8 +91,6 @@ public class WorkActivity extends AppCompatActivity implements View.OnClickListe
                 chronometerUsed = false;
                 pointsFieldUsed = true;
                 resultFieldUsed = true;
-                radioGroupUsed = false;
-                cbxSuccess.setVisibility(View.GONE);
                 break;
             case MooseRaces:
                 workFragment = new MooseRacesFragment();
@@ -104,7 +98,6 @@ public class WorkActivity extends AppCompatActivity implements View.OnClickListe
                 chronometerUsed = true;
                 pointsFieldUsed = true;
                 resultFieldUsed = true;
-                radioGroupUsed = true;
                 findViewById(R.id.lyt_cbx_success).setVisibility(View.GONE);
                 btnFinish.setVisibility(View.GONE);
                 findViewById(R.id.lyt_competitor_number).setVisibility(View.GONE);
@@ -129,14 +122,13 @@ public class WorkActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         if (v == btnFinish) {
             Intent intent = new Intent(this, SummaryResultActivity.class);
-            stage.getCurrentCompetitor().setPoints(workFragment.getPoints());
-            stage.getCurrentCompetitor().setTime(workFragment.getTime());
-            stage.getCurrentCompetitor().setResult(workFragment.getResult());
-            stage.getCurrentCompetitor().setPass(workFragment.getPass());
-            if (stage.getType() != WorkActivityType.Pass)
-                stage.getCurrentCompetitor().setSuccess(cbxSuccess.isChecked());
-            else
-                stage.getCurrentCompetitor().setSuccess(workFragment.getPass());
+            Competitor currentCompetitor = stage.getCurrentCompetitor();
+            currentCompetitor.setPoints(workFragment.getPoints());
+            currentCompetitor.setTime(workFragment.getTime());
+            currentCompetitor.setResult(workFragment.getResult());
+            currentCompetitor.setSuccess(cbxSuccess.isChecked());
+
+            ResultWriter.saveResult(currentCompetitor);
 
             intent.putExtra(getResources().getString(R.string.StageAsExtra), stage);
             startActivity(intent);
@@ -145,23 +137,19 @@ public class WorkActivity extends AppCompatActivity implements View.OnClickListe
 
     public void chronometerUsed(boolean flag) {
         chronometerUsed = flag;
-        btnFinish.setEnabled(chronometerUsed && pointsFieldUsed && resultFieldUsed && radioGroupUsed);
+        btnFinish.setEnabled(chronometerUsed && pointsFieldUsed && resultFieldUsed);
     }
 
     public void pointsFieldUsed(boolean flag) {
         pointsFieldUsed = flag;
-        btnFinish.setEnabled(chronometerUsed && pointsFieldUsed && resultFieldUsed && radioGroupUsed);
+        btnFinish.setEnabled(chronometerUsed && pointsFieldUsed && resultFieldUsed);
     }
 
     public void resultFieldUsed(boolean flag) {
         resultFieldUsed = flag;
-        btnFinish.setEnabled(chronometerUsed && pointsFieldUsed && resultFieldUsed && radioGroupUsed);
+        btnFinish.setEnabled(chronometerUsed && pointsFieldUsed && resultFieldUsed);
     }
 
-    public void radioGroupUsed(boolean flag) {
-        radioGroupUsed = flag;
-        btnFinish.setEnabled(chronometerUsed && pointsFieldUsed && resultFieldUsed && radioGroupUsed);
-    }
 
 
     public void saveTimerDuration(long time) {

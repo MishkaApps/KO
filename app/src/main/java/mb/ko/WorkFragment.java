@@ -9,7 +9,6 @@ public interface WorkFragment {
     Time getTime();
     int getPoints();
     int getResult();
-    boolean getPass();
     void setWorkActivity(WorkActivity workActivity);
 
     void setTimerDuration(long timerDuration);

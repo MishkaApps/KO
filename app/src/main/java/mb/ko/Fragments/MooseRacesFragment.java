@@ -73,11 +73,6 @@ public class MooseRacesFragment extends Fragment implements WorkFragment, View.O
     }
 
     @Override
-    public boolean getPass() {
-        return false;
-    }
-
-    @Override
     public void setWorkActivity(WorkActivity workActivity) {
         this.workActivity = workActivity;
     }
