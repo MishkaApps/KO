@@ -98,16 +98,6 @@
 
         </LinearLayout>
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.4"
-            android:text="@string/button_save_time"
-            android:id="@+id/btnSaveTime"
-            android:layout_gravity="center"
-            android:background="@color/colorButtonBackground" />
-
-
     </LinearLayout>
 
 </FrameLayout>

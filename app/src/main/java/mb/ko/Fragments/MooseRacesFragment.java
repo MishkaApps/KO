@@ -26,7 +26,6 @@ public class MooseRacesFragment extends Fragment implements WorkFragment, View.O
     private EditText etTeamNumber;
     private WorkActivity workActivity;
     private Button btnStartStop, btnReset;
-    private Button btnSaveTime;
     private Timer timer;
 
 
@@ -42,13 +41,11 @@ public class MooseRacesFragment extends Fragment implements WorkFragment, View.O
         etTeamNumber = (EditText) view.findViewById(R.id.et_team_number);
         btnStartStop = (Button) view.findViewById(R.id.btnStartStop);
         btnReset = (Button) view.findViewById(R.id.btnReset);
-        btnSaveTime = (Button) view.findViewById(R.id.btnSaveTime);
         timer = (Timer) view.findViewById(R.id.timer);
         timer.setStartStopButton(btnStartStop);
 
         btnStartStop.setOnClickListener(this);
         btnReset.setOnClickListener(this);
-        btnSaveTime.setOnClickListener(this);
         timer.setOnClickListener(this);
         etTeamNumber.setText("");
 
@@ -59,7 +56,7 @@ public class MooseRacesFragment extends Fragment implements WorkFragment, View.O
 
     @Override
     public Time getTime() {
-        return null;
+        return new Time(System.currentTimeMillis());
     }
 
     @Override
@@ -101,16 +98,16 @@ public class MooseRacesFragment extends Fragment implements WorkFragment, View.O
             intent.putExtra(getResources().getString(R.string.timer_time), getResources().getString(R.string.with_result));
             startActivityForResult(intent, getResources().getInteger(R.integer.set_timer_time));
         }
+    }
 
-        if(v == btnSaveTime){
-            if (!CompetitorNumberActivity.isNumberValid(etTeamNumber.getText().toString())){
-                Toast.makeText(workActivity, "Введите корректный номер команды", Toast.LENGTH_SHORT).show();
-                return;
-            }
-
-            Toast.makeText(workActivity, "Время команды №" + etTeamNumber.getText().toString() + " записано", Toast.LENGTH_SHORT).show();
-            etTeamNumber.setText("");
+    public boolean checkTeamNumber(){
+        if (!CompetitorNumberActivity.isNumberValid(etTeamNumber.getText().toString())){
+            Toast.makeText(workActivity, "Введите корректный номер команды", Toast.LENGTH_SHORT).show();
+            return false;
         }
+
+        Toast.makeText(workActivity, "Время команды №" + etTeamNumber.getText().toString() + " записано", Toast.LENGTH_SHORT).show();
+        return true;
     }
 
 
@@ -125,9 +122,13 @@ public class MooseRacesFragment extends Fragment implements WorkFragment, View.O
     public void setTimerDuration(long timerDuration) {
         timer.setTimerParameters(timerDuration, workActivity.getResources().getInteger(R.integer.timer_tick_period));
         boolean flag = timerDuration == 0L;
-        workActivity.chronometerUsed(flag);
         btnStartStop.setEnabled(!flag);
         btnReset.setEnabled(!flag);
     }
 
+    public int getNumber() {
+        int teamNumber = Integer.decode(etTeamNumber.getText().toString());
+        etTeamNumber.setText("");
+        return teamNumber;
+    }
 }

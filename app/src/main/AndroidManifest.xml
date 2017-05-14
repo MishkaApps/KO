@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="mb.ko">
-    
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
 
     <application
         android:allowBackup="true"
@@ -22,8 +23,7 @@
         <activity android:name=".Activities.SummaryResultActivity" />
         <activity android:name=".Activities.StageNumberActivity" />
         <activity android:name=".Activities.TimerActivity" />
-        <activity android:name=".Activities.TimerSettingsActivity" />
-        <activity android:name=".Fragments.PassActivity"></activity>
+        <activity android:name=".Activities.SettingsActivity"></activity>
     </application>
 
 </manifest>

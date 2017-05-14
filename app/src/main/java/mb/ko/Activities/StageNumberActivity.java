@@ -74,8 +74,10 @@ public class StageNumberActivity extends AppCompatActivity implements View.OnKey
         } else if (stage.getType() == WorkActivityType.MooseRaces) {
 
             Intent intent;
-                intent = new Intent(this, WorkActivity.class);
+            intent = new Intent(this, WorkActivity.class);
 
+            Integer stageNumber = Integer.decode(etStage.getText().toString());
+            stage.setNumber(stageNumber);
             long time = 60000L;
             stage.setTimerDuration(time);
             intent.putExtra(getResources().getString(R.string.StageAsExtra), stage);

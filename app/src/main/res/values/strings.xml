@@ -3,7 +3,7 @@
 
     <string name="btn_mode_time_plus_points">Время + баллы</string>
     <string name="btn_mode_time">Время</string>
-    <string name="btnModeResultPlusPoints">Результат + баллы</string>
+    <string name="btn_mode_result_plus_points">Результат + баллы</string>
     <string name="btn_mode_result">Результат</string>
     <string name="btn_mode_passnpass">Прошел/Не прошел</string>
     <string name="btn_mode_moose_races">Лосинные бега</string>
@@ -38,4 +38,6 @@
     <string name="competitor_pass">Участник прошел</string>
     <string name="competitor_not_pass">Участник не прошел</string>
     <string name="competitor_fails">Не прошел</string>
+    <string name="btn_settings">Настройки</string>
+    <string name="settings">Настройки</string>
 </resources>

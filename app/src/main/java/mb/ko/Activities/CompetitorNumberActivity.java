@@ -36,6 +36,7 @@ public class CompetitorNumberActivity extends AppCompatActivity implements View.
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);  // todo Узнать как точно работает этот метод
     }
 
+
     @Override
     public boolean onKey(View v, int keyCode, KeyEvent event) {
 
@@ -62,10 +63,7 @@ public class CompetitorNumberActivity extends AppCompatActivity implements View.
         Intent intent = new Intent(this, WorkActivity.class);
 
         Stage stage = (Stage) getIntent().getSerializableExtra(getResources().getString(R.string.StageAsExtra));
-
-
-
-        stage.setCompetitor(Integer.decode(etNumber.getText().toString()));
+        stage.setCurrentCompetitorNumber(Integer.decode(etNumber.getText().toString()));
         intent.putExtra(getResources().getString(R.string.StageAsExtra), stage);
 
         startActivity(intent);

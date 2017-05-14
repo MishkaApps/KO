@@ -70,7 +70,7 @@ public class SummaryResultActivity extends AppCompatActivity implements View.OnC
                 findViewById(R.id.lytSummaryResultTime).setVisibility(View.GONE);
                 findViewById(R.id.lytSummaryResultPoints).setVisibility(View.GONE);
                 findViewById(R.id.lytSummaryResultResult).setVisibility(View.GONE);
-                tvPassed.setText(String.valueOf(stage.getCurrentCompetitor().getSuccess()));
+                tvPassed.setText(stage.getCurrentCompetitor().getSuccess());
                 break;
         }
 

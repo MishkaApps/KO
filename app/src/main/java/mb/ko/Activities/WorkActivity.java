@@ -5,6 +5,7 @@ import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -99,7 +100,7 @@ public class WorkActivity extends AppCompatActivity implements View.OnClickListe
                 pointsFieldUsed = true;
                 resultFieldUsed = true;
                 findViewById(R.id.lyt_cbx_success).setVisibility(View.GONE);
-                btnFinish.setVisibility(View.GONE);
+                btnFinish.setText("Записать результат");
                 findViewById(R.id.lyt_competitor_number).setVisibility(View.GONE);
                 break;
         }
@@ -121,18 +122,35 @@ public class WorkActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         if (v == btnFinish) {
+            if(stage.getType() == WorkActivityType.MooseRaces){
+                if(((MooseRacesFragment) workFragment).checkTeamNumber()){
+                    stage.setCurrentCompetitorNumber(((MooseRacesFragment) workFragment).getNumber());
+                    stage.setCompetitor();
+                    Competitor currentCompetitor = stage.getCurrentCompetitor();
+                    tvSummaryCompetitorsAmount.setText(String.valueOf(stage.getSummaryCompetitorsAmount()));
+                    saveResult(currentCompetitor);
+                    ResultWriter.saveResult(this, currentCompetitor, stage);
+                }
+                return;
+            }
             Intent intent = new Intent(this, SummaryResultActivity.class);
+            stage.setCompetitor();
             Competitor currentCompetitor = stage.getCurrentCompetitor();
-            currentCompetitor.setPoints(workFragment.getPoints());
-            currentCompetitor.setTime(workFragment.getTime());
-            currentCompetitor.setResult(workFragment.getResult());
-            currentCompetitor.setSuccess(cbxSuccess.isChecked());
+            saveResult(currentCompetitor);
 
-            ResultWriter.saveResult(currentCompetitor);
+            stage = (Stage) getIntent().getSerializableExtra(getResources().getString(R.string.StageAsExtra));
+            ResultWriter.saveResult(this, currentCompetitor, stage);
 
             intent.putExtra(getResources().getString(R.string.StageAsExtra), stage);
             startActivity(intent);
         }
+    }
+
+    private void saveResult(Competitor competitor){
+        competitor.setPoints(workFragment.getPoints());
+        competitor.setTime(workFragment.getTime());
+        competitor.setResult(workFragment.getResult());
+        competitor.setSuccess(cbxSuccess.isChecked());
     }
 
     public void chronometerUsed(boolean flag) {
@@ -149,7 +167,6 @@ public class WorkActivity extends AppCompatActivity implements View.OnClickListe
         resultFieldUsed = flag;
         btnFinish.setEnabled(chronometerUsed && pointsFieldUsed && resultFieldUsed);
     }
-
 
 
     public void saveTimerDuration(long time) {

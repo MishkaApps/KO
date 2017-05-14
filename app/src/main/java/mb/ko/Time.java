@@ -13,7 +13,6 @@ public class Time implements Serializable{
     }
 
     public Time() {
-
     }
 
     public static String getFormat(){
@@ -34,6 +33,5 @@ public class Time implements Serializable{
                 TimeUnit.MILLISECONDS.toMinutes(time),
                 TimeUnit.MILLISECONDS.toSeconds(time) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(time)));
     }
-
 
 }

@@ -1,5 +1,7 @@
 package mb.ko;
 
+import android.content.Context;
+import android.content.res.Resources;
 import android.util.Log;
 
 import java.io.Serializable;
@@ -14,6 +16,7 @@ public class Stage implements Serializable{
     private int number;
     private HashMap<Integer, Competitor> competitors;
     private long timerDuration;
+    private int currentCompetitorNumber;
 
     public Competitor getCurrentCompetitor() {
         return currentCompetitor;
@@ -24,6 +27,10 @@ public class Stage implements Serializable{
     public Stage(WorkActivityType type){
         this.type = type;
         competitors = new HashMap<>();
+    }
+
+    public void setCurrentCompetitorNumber(int number){
+        currentCompetitorNumber = number;
     }
 
 
@@ -39,17 +46,20 @@ public class Stage implements Serializable{
         return type;
     }
 
-    public void setCompetitor(int id){
-        if(competitors.containsKey(id))
+    public void setCompetitor(){
+        int id = currentCompetitorNumber;
+        if(competitors.containsKey(id)) {
             currentCompetitor = competitors.get(id);
-        else {
+            currentCompetitor.addAttempt();
+        }else {
             competitors.put(id, new Competitor(id));
             currentCompetitor = competitors.get(id);
+            currentCompetitor.addAttempt();
         }
     }
 
     public int getCompetitorNumber() {
-        return currentCompetitor.getNumber();
+        return currentCompetitorNumber;
     }
 
     public int getSummaryCompetitorsAmount() {
@@ -62,5 +72,34 @@ public class Stage implements Serializable{
 
     public long getTimerDuration() {
         return timerDuration;
+    }
+
+    public String getInfo(Context context){
+
+        String typeRus = "|";
+        Resources resources = context.getResources();
+        switch(type){
+            case StopwatchAndPoints:
+                typeRus = resources.getString(R.string.btn_mode_time_plus_points);
+                break;
+            case Stopwatch:
+                typeRus = resources.getString(R.string.btn_mode_time);
+                break;
+            case ResultPointsAndTimer:
+                typeRus = resources.getString(R.string.btn_mode_result_plus_points);
+                break;
+            case ResultAndTimer:
+                typeRus = resources.getString(R.string.btn_mode_result);
+                break;
+            case Pass:
+                typeRus = resources.getString(R.string.btn_mode_passnpass);
+                break;
+            case MooseRaces:
+                typeRus = resources.getString(R.string.btn_mode_moose_races);
+                break;
+
+
+        }
+        return typeRus + "," + number;
     }
 }
